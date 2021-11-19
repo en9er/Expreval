@@ -7,8 +7,10 @@ using System.Text;
 
 namespace expreval
 {
-    class Expreval
+    public class Expreval
     {
+        public bool err = false;
+        public bool lackBrace = false;
         public string ReplaceSeparators(string expr)
         {
             int i = 0;
@@ -105,7 +107,16 @@ namespace expreval
                 }
                 string right = "";
                 string left = "";
-                int index = exp.IndexOf(operators.Peek());
+                int index;
+                if(exp[0] == '-' && operators.Peek() == '-')
+                {
+                    index = exp.Substring(1).IndexOf(operators.Peek());
+                    index++;
+                }
+                else
+                {
+                    index = exp.IndexOf(operators.Peek());
+                }
                 if (index != -1)
                 {
                     for(int j = index + 1; j < exp.Length; j++)
@@ -137,7 +148,6 @@ namespace expreval
                             break;
                         }
                     }
-
 
                     double dleft = ParseArgument(left);
                     double dright = ParseArgument(right, true);
@@ -174,15 +184,27 @@ namespace expreval
                             break;
                         }
                     }
-
-                    exp = exp.Replace(exp.Substring(index - left.Length, left.Length + 1 + right.Length), res.ToString());
+                    string s = exp.Substring(index - left.Length, left.Length + 1 + right.Length);
+                    if (s[0] == '-')
+                        exp = exp.Replace(exp.Substring(index - left.Length, left.Length + 1 + right.Length), ("+" + res.ToString()));
+                    else
+                        exp = exp.Replace(exp.Substring(index - left.Length, left.Length + 1 + right.Length), res.ToString());
                 }
                 else
                 {
                     operators.Pop();
                 }
             }
-            return double.Parse(exp);
+            double r;
+            if(double.TryParse(exp, out r))
+            {
+                return r;
+            }
+            {
+                err = true;
+                return 0;   
+            }
+
         }
 
 
@@ -195,16 +217,37 @@ namespace expreval
                 {
                     if (exp.Contains(')'))
                     {
-                        string subExpr = exp.Substring(exp.IndexOf('('), IndexOfCorrespondingRightBrace(exp.IndexOf('('), exp) - exp.IndexOf('(') + 1);
-                        exp = exp.Replace(subExpr, EvaluateExpression(subExpr.Substring(1, subExpr.Length - 2)));
+                        int ind = IndexOfCorrespondingRightBrace(exp.IndexOf('('), exp);
+                        if (ind == -1)
+                        {
+                            err = true;
+                            return "Error";
+                        }
+                        string subExpr = exp.Substring(exp.IndexOf('('), ind - exp.IndexOf('(') + 1);
+                        string newExpr = EvaluateExpression(subExpr.Substring(1, subExpr.Length - 2));
+                        int i = exp.IndexOf(subExpr);
+                        if(i != 0)
+                        {
+                            if (char.IsDigit(exp[i - 1]))
+                            {
+                                newExpr = "*" + newExpr;
+                            }
+                        }
+                        exp = exp.Replace(subExpr, newExpr);
                         return EvaluateExpression(exp);
                     }
                     else
-                        throw new SystemException(") expected");
+                    {
+                        lackBrace = true;
+                        return "close )";
+                        //throw new SystemException(") expected");
+                    }
                 }
                 else if (exp.Contains(')'))
                 {
-                    throw new SystemException("Error ( expected");
+                    lackBrace = true;
+                    return "open (";
+                    //throw new SystemException("Error ( expected");
                 }
                 else
                 {
@@ -260,6 +303,8 @@ namespace expreval
         }
 
 
+
+        [TestCase("-2+4", 2)]
         [TestCase("8.2 + 4 - 3", 9.2)]
         [TestCase("12 + 6", 18)]
         [TestCase("3", 3)]
@@ -271,6 +316,7 @@ namespace expreval
         [TestCase("-1", -1)]
         [TestCase("+1", 1)]
         [TestCase("5", 5)]
+        [TestCase("1-3--5", 3)]
         [TestCase("1000.5-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7", 860.5)]
         [TestCase("1000--7-7-7-7-7-7-7--7--7-7-7----------------------7-7--7---7--7-7-7-7-7---7", 937)]
         public void ShouldSolveExpressionWithNoBraces(string testString, double expected)
@@ -291,6 +337,8 @@ namespace expreval
         [TestCase("1000 - 7 * 3 - 1 - 1 - 8 - 343 - (2 - 1 * (5 * 4))", "644")]
         [TestCase("1000 - 7 - 7 - 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7- 7 -7- 7- 7- 7- 7- 7 -7", "790")]
         [TestCase("((2+3) * 4)", "20")]
+        [TestCase("50-25+5000000000000000000000", "5,5E+22")]
+        //[TestCase("55/555555555555555", "9,9×E−14")]
         [TestCase("(((10 / 5)+3) * 4)", "20")]
         [TestCase("", "")]
         public void ShouldReturnSolvedExpression(string testString, string expected)
