@@ -14,6 +14,46 @@
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
         </Style>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="NumPad0" CommandParameter="0" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad1" CommandParameter="1" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad2" CommandParameter="2" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad3" CommandParameter="3" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad4" CommandParameter="4" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad5" CommandParameter="5" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad6" CommandParameter="6" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad7" CommandParameter="7" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad8" CommandParameter="8" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad9" CommandParameter="9" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Decimal" CommandParameter="," Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D0" CommandParameter="0" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D1" CommandParameter="1" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D2" CommandParameter="2" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D3" CommandParameter="3" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D4" CommandParameter="4" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D5" CommandParameter="5" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D6" CommandParameter="6" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D7" CommandParameter="7" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D8" CommandParameter="8" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D9" CommandParameter="9" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D9" CommandParameter="9" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D9" Modifiers="Shift" CommandParameter="(" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D0" Modifiers="Shift" CommandParameter=")" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="C" CommandParameter="C" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemQuestion" CommandParameter="/" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Enter" CommandParameter="Enter" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemPlus" CommandParameter="+" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemMinus" CommandParameter="-" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Backspace" CommandParameter="⌫" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemComma" CommandParameter="," Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Add" CommandParameter="+" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Subtract" CommandParameter="-" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Divide" CommandParameter="÷" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Multiply" CommandParameter="×" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D8" Modifiers="Shift" CommandParameter="×" Command="{Binding IButtonClicked}"/>
+
+
+    </Window.InputBindings>
     <Grid x:Name="layout" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />

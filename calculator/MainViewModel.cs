@@ -4,12 +4,14 @@ using System.Text;
 using System.ComponentModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Xaml.Behaviors.Core;
 
 namespace calculator
 {
     class MainViewModel:INotifyPropertyChanged
     {
         public ICommand IButtonClicked { get; }
+        public ICommand SolvePressed { get; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -76,7 +78,6 @@ namespace calculator
                 Expression = exp;
             }
         }
-
         public void HotSolve(string exp)
         {
             exp = calc.DeleteWhiteSpaces(exp);
@@ -121,6 +122,10 @@ namespace calculator
                 {
                     if (Expression.Length != 0)
                         Expression = Expression.Substring(0, Expression.Length - 1);
+                }
+                else if(x == "Enter")
+                {
+                    Solve(Expression);
                 }
                 else
                 {
