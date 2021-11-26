@@ -1,0 +1,102 @@
+﻿<Window x:Class="calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="550" Width="400">
+    <Window.Resources>
+        <Style x:Key="Button_style" TargetType="{x:Type Button}">
+            <Setter Property="Command" Value="{Binding IButtonClicked}"></Setter>
+            <Setter Property="FontSize" Value="22"></Setter>
+            <Setter Property="Background" Value="DarkGray"></Setter>
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+        </Style>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="NumPad0" CommandParameter="0" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad1" CommandParameter="1" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad2" CommandParameter="2" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad3" CommandParameter="3" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad4" CommandParameter="4" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad5" CommandParameter="5" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad6" CommandParameter="6" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad7" CommandParameter="7" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad8" CommandParameter="8" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="NumPad9" CommandParameter="9" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Decimal" CommandParameter="," Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D0" CommandParameter="0" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D1" CommandParameter="1" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D2" CommandParameter="2" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D3" CommandParameter="3" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D4" CommandParameter="4" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D5" CommandParameter="5" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D6" CommandParameter="6" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D7" CommandParameter="7" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D8" CommandParameter="8" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D9" CommandParameter="9" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D9" CommandParameter="9" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D9" Modifiers="Shift" CommandParameter="(" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D0" Modifiers="Shift" CommandParameter=")" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="C" CommandParameter="C" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemQuestion" CommandParameter="/" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Enter" CommandParameter="Enter" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemPlus" CommandParameter="+" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemMinus" CommandParameter="-" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Backspace" CommandParameter="⌫" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="OemComma" CommandParameter="," Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Add" CommandParameter="+" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Subtract" CommandParameter="-" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Divide" CommandParameter="÷" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="Multiply" CommandParameter="×" Command="{Binding IButtonClicked}"/>
+        <KeyBinding Key="D8" Modifiers="Shift" CommandParameter="×" Command="{Binding IButtonClicked}"/>
+
+
+    </Window.InputBindings>
+    <Grid x:Name="layout" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Right">
+            <Label Padding="10" x:Name="MainText" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="44" Content="{Binding Expression}" />
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Right">
+            <Label Padding="7"  x:Name="HotText" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Gray" FontSize="18" Content="{Binding HotExpression}"/>
+        </Viewbox>
+        
+        <Button Content="1" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="5"></Button>
+        <Button Content="2" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="5"></Button>
+        <Button Content="3" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="5"></Button>
+        <Button Content="4" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="4"></Button>
+        <Button Content="5" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="4"></Button>
+        <Button Content="6" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="4"></Button>
+        <Button Content="7" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="3"></Button>
+        <Button Content="8" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="3"></Button>
+        <Button Content="9" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="3"></Button>
+        <Button Content="0" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="6"></Button>
+        <Button Content="+" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="5"></Button>
+        <Button Content="-" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="4"></Button>
+        <Button Content="×" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="3"></Button>
+        <Button Content="÷" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="2"></Button>
+        <Button Content="," Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="6"></Button>
+        <Button Content="⌫" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="6"></Button>
+        <Button Content="C" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="2"></Button>
+        <Button Content=")" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="2"></Button>
+        <Button Content="(" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="2"></Button>
+        <Button Content="=" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="6"></Button>
+    </Grid>
+
+</Window>
