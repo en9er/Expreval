@@ -5,13 +5,13 @@ using System.ComponentModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Xaml.Behaviors.Core;
+using System.Collections.ObjectModel;
 
 namespace calculator
 {
-    class MainViewModel:INotifyPropertyChanged
+    class MainViewModel : INotifyPropertyChanged
     {
         public ICommand IButtonClicked { get; }
-        public ICommand SolvePressed { get; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -20,18 +20,20 @@ namespace calculator
         private expreval.Expreval calc = new expreval.Expreval();
         private string _expression = "";
         private string _hotExpression = "";
+        private int _historyVisibility = 0;
+        private ObservableCollection<string> _recentExpressions = new ObservableCollection<string>();
         public ICommand SolveCommand { get; }
-        public bool Error { 
+        public bool Error {
             get
             {
                 return calc.err;
             }
             set
             {
-                if(value != calc.err)
+                if (value != calc.err)
                     calc.err = value;
             }
-        
+
         }
         public string Expression
         {
@@ -45,6 +47,19 @@ namespace calculator
                     return;
                 _expression = value;
                 OnPropertyChanged(nameof(Expression));
+            }
+        }
+        public int HistoryVisibility
+        {
+            get
+            {
+                return _historyVisibility;
+            }
+            set
+            {
+                if (_historyVisibility != value)
+                    _historyVisibility = value;
+                OnPropertyChanged(nameof(HistoryVisibility));
             }
         }
 
@@ -64,18 +79,24 @@ namespace calculator
 
         public void Solve(string exp)
         {
+            string sourceExp = exp;
             exp = calc.DeleteWhiteSpaces(exp);
             exp = exp.Replace('×', '*');
             exp = exp.Replace('÷', '/');
             exp = calc.EvaluateExpression(exp);
 
-            if(Error)
+            if (Error)
             {
                 Expression = "Error";
             }
             else
             {
                 Expression = exp;
+                HotExpression = "";
+                if(_recentExpressions.Count == 0)
+                    _recentExpressions.Insert(0, sourceExp);
+                else if (sourceExp != _recentExpressions[0])
+                    _recentExpressions.Insert(0, sourceExp);
             }
         }
         public void HotSolve(string exp)
@@ -95,6 +116,13 @@ namespace calculator
             }
         }
 
+        public ObservableCollection<string> RecentExpressions
+        {
+            get
+            {
+                return _recentExpressions;
+            }
+        }
         public MainViewModel()
         {
             IButtonClicked = new RelayCommand<string>(x =>
@@ -112,6 +140,13 @@ namespace calculator
                 {
                     Solve(Expression);
                     HotExpression = "";
+                }
+                else if(x == "history")
+                {
+                    if (HistoryVisibility == 0)
+                        HistoryVisibility = 1000;
+                    else
+                        HistoryVisibility = 0;
                 }
                 else if (x == "C")
                 {
@@ -173,7 +208,7 @@ namespace calculator
 
                 }
                 //Hot Solve Logic
-                if (x != "+" && x != "-" && x != "÷" && x != "×" && x != "=")
+                if (x != "+" && x != "-" && x != "÷" && x != "×" && x != "=" && x != "Enter")
                 {
                     HotSolve(Expression);
                 }

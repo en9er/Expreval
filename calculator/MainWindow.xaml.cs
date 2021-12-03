@@ -19,10 +19,17 @@ namespace calculator
 {
     public partial class MainWindow : Window
     {
+        MainViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            vm = new MainViewModel();
+            DataContext = vm;
+        }
+
+        private void HistoryPannel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            vm.Expression = HistoryPannel.SelectedItem.ToString();
         }
     }
 }

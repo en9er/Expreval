@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="550" Width="400">
+        Title="Calculator" Height="600" Width="400">
     <Window.Resources>
         <Style x:Key="Button_style" TargetType="{x:Type Button}">
             <Setter Property="Command" Value="{Binding IButtonClicked}"></Setter>
@@ -63,6 +63,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -70,33 +71,57 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+
         <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Right">
             <Label Padding="10" x:Name="MainText" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="44" Content="{Binding Expression}" />
         </Viewbox>
         <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Right">
             <Label Padding="7"  x:Name="HotText" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Gray" FontSize="18" Content="{Binding HotExpression}"/>
         </Viewbox>
-        
-        <Button Content="1" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="5"></Button>
-        <Button Content="2" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="5"></Button>
-        <Button Content="3" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="5"></Button>
-        <Button Content="4" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="4"></Button>
-        <Button Content="5" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="4"></Button>
-        <Button Content="6" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="4"></Button>
-        <Button Content="7" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="3"></Button>
-        <Button Content="8" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="3"></Button>
-        <Button Content="9" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="3"></Button>
-        <Button Content="0" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="6"></Button>
-        <Button Content="+" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="5"></Button>
-        <Button Content="-" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="4"></Button>
-        <Button Content="×" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="3"></Button>
-        <Button Content="÷" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="2"></Button>
-        <Button Content="," Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="6"></Button>
-        <Button Content="⌫" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="6"></Button>
-        <Button Content="C" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="2"></Button>
-        <Button Content=")" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="2"></Button>
-        <Button Content="(" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="2"></Button>
-        <Button Content="=" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="6"></Button>
+        <Button Grid.Row="2" VerticalAlignment="Bottom" Height="20" Grid.ColumnSpan="4" Command="{Binding IButtonClicked}" CommandParameter="history">History</Button>
+
+        <ListBox x:Name="HistoryPannel" Grid.Column="0" Grid.Row="3" Panel.ZIndex="{Binding HistoryVisibility}" Grid.ColumnSpan="4" 
+                 Grid.RowSpan="5" 
+                 Background="Gray" 
+                 ItemsSource="{Binding RecentExpressions}"
+                 SelectionChanged="HistoryPannel_SelectionChanged">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Background" Value="LightSteelBlue"/>
+                    <Setter Property="Margin" Value="1"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+
+        <Button Content="1" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="6"></Button>
+        <Button Content="2" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="6"></Button>
+        <Button Content="3" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="6"></Button>
+        <Button Content="4" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="5"></Button>
+        <Button Content="5" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="5"></Button>
+        <Button Content="6" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="5"></Button>
+        <Button Content="7" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="4"></Button>
+        <Button Content="8" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="4"></Button>
+        <Button Content="9" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="4"></Button>
+        <Button Content="0" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="7"></Button>
+        <Button Content="+" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="6"></Button>
+        <Button Content="-" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="5"></Button>
+        <Button Content="×" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="4"></Button>
+        <Button Content="÷" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="3"></Button>
+        <Button Content="," Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="7"></Button>
+        <Button Content="⌫" Style="{StaticResource Button_style}" Grid.Column="3" Grid.Row="7"></Button>
+        <Button Content="C" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="3"></Button>
+        <Button Content=")" Style="{StaticResource Button_style}" Grid.Column="1" Grid.Row="3"></Button>
+        <Button Content="(" Style="{StaticResource Button_style}" Grid.Column="0" Grid.Row="3"></Button>
+        <Button Content="=" Style="{StaticResource Button_style}" Grid.Column="2" Grid.Row="7"></Button>
     </Grid>
 
 </Window>
