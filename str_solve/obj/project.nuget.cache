@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "dgSpecHash": "ikhBteFmadE2qe39z/jDrAcl6rW+IhT8h0m3iqmjk0/Ncb6Vd0dnfjltvgyHvrpBaPErZuDntUvLgUBZZn/9Zw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\en9er\\source\\repos\\str_solve\\str_solve\\str_solve.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\en9er\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\fluentassertions\\6.3.0\\fluentassertions.6.3.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\jetbrains.annotations\\2021.3.0\\jetbrains.annotations.2021.3.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\microsoft.codecoverage\\16.11.0\\microsoft.codecoverage.16.11.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\microsoft.net.test.sdk\\16.11.0\\microsoft.net.test.sdk.16.11.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.11.0\\microsoft.testplatform.objectmodel.16.11.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\microsoft.testplatform.testhost\\16.11.0\\microsoft.testplatform.testhost.16.11.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\nuget.frameworks\\5.0.0\\nuget.frameworks.5.0.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\nunit\\3.13.2\\nunit.3.13.2.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\nunit3testadapter\\4.0.0\\nunit3testadapter.4.0.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.115.5\\stub.system.data.sqlite.core.netstandard.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.0\\system.configuration.configurationmanager.4.4.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\system.data.sqlite.core\\1.0.115.5\\system.data.sqlite.core.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512",
+    "C:\\Users\\en9er\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.4.0\\system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
